@@ -3,7 +3,7 @@ class Solution {
         List<Boolean> result = new ArrayList<>();
         int l = 0;
         for (int i : candies) {
-            if (i > l) l = i;
+            l=Math.max(i,l);
         }
         for (int i : candies) {
             result.add(i + extraCandies >= l);
