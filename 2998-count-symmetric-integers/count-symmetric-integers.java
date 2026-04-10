@@ -1,17 +1,34 @@
 class Solution {
     public int countSymmetricIntegers(int low, int high) {
-        int res=0;
-        for(int a=low;a<=high;a++){
-            if(a<100 && a%11==0){
-                res++;
-            }else if(1000<=a && a<10000){
-                int l=a/1000 + (a%1000)/100;
-                int r = (a % 100) / 10 + (a % 10);
-                if (l == r) {
-                    res++;
-                }
+        int count = 0; // 🍥 Shadow Clone counter
+
+        for (int num = low; num <= high; num++) {
+            String str = Integer.toString(num); // 🎭 Transform number to string
+            int len = str.length();
+
+            // 🔥 Skip if it doesn't have even chakra balance (odd number of digits)
+            if (len % 2 != 0) continue;
+
+            int half = len / 2;
+            int leftSum = 0;
+            int rightSum = 0;
+
+            // ⬅️ Sum of the left half (first n digits)
+            for (int i = 0; i < half; i++) {
+                leftSum += str.charAt(i) - '0';
+            }
+
+            // ➡️ Sum of the right half (last n digits)
+            for (int i = half; i < len; i++) {
+                rightSum += str.charAt(i) - '0';
+            }
+
+            // ☯️ If chakra is balanced, count it
+            if (leftSum == rightSum) {
+                count++;
             }
         }
-        return res;
+
+        return count; // 🍥 Final mission report
     }
 }
