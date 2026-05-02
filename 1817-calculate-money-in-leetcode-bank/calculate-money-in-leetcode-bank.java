@@ -9,8 +9,7 @@ class Solution {
         for (int i = 1; i < c; i++) {
             a += (28 + 7 * i);
         }
-        int rem = n % 7;
-        res = a + rem * (2 * c + rem + 1) / 2;
+        res = a + (n % 7) * ((n % 7) + 1) / 2 + (n % 7) * c;
         return res;
     }
 }
