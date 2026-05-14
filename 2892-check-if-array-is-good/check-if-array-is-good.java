@@ -1,18 +1,16 @@
 class Solution {
     public boolean isGood(int[] nums){
-        int n = nums.length;
-        int[] count = new int[n];
-        for (int i : nums) {
-            if (i >= n) {
-                return false;
+        int n = nums.length - 1;
+        Set<Integer> seen = new HashSet<>();
+        boolean dup = false;
+        for (int num : nums) {
+            if (num > n) return false;
+            if (seen.contains(num)) {
+                if (num < n || dup) return false;
+                dup = true;
+                continue;
             }
-            if (i < n - 1 && count[i] > 0) {
-                return false;
-            }
-            if (i == n - 1 && count[i] > 1) {
-                return false;
-            }
-            count[i]++;
+            seen.add(num);
         }
         return true;
     }
