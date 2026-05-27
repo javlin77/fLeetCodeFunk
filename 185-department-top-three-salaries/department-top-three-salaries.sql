@@ -1,16 +1,19 @@
-# Write your MySQL query statement below
-SELECT Department, Employee, Salary
-FROM (
-    SELECT 
-        d.name AS Department,
-        e.name AS Employee,
-        e.salary AS Salary,
-        DENSE_RANK() OVER (
-            PARTITION BY e.departmentId
-            ORDER BY e.salary DESC
-        ) AS rnk
-    FROM Employee e
-    JOIN Department d
-    ON e.departmentId = d.id
-) t
-WHERE rnk <= 3;
+/* Write your T-SQL query statement below */
+--ms sql server
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM
+    Department d
+    JOIN Employee e ON d.id = e.departmentId
+WHERE
+    e.salary IN (
+        SELECT DISTINCT TOP 3 salary
+        FROM Employee e2
+        WHERE e2.departmentId = d.id
+        ORDER BY salary DESC
+    )
+ORDER BY
+    Department, Salary DESC;
+	
