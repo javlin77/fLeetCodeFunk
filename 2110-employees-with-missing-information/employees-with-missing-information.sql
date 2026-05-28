@@ -1,6 +1,8 @@
-# Write your MySQL query statement below
-SELECT employee_id FROM Employees WHERE employee_id NOT IN (SELECT employee_id FROM Salaries)
-UNION 
-SELECT employee_id FROM Salaries WHERE employee_id NOT IN (SELECT employee_id FROM Employees)
-
-ORDER BY 1 ASC
+-- Write your PostgreSQL query statement below
+SELECT COALESCE(e.employee_id, s.employee_id) AS employee_id
+FROM Employees e
+FULL OUTER JOIN Salaries s
+USING(employee_id)
+WHERE e.name IS NULL
+   OR s.salary IS NULL
+ORDER BY employee_id;
