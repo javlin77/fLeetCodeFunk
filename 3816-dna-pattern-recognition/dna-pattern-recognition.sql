@@ -1,8 +1,14 @@
 # Write your MySQL query statement below
-select *,(case when dna_sequence like 'ATG%' then 1 else 0 end) 
-as has_start,
-        (case when dna_sequence like '%TAA' or dna_sequence like '%TAG' or dna_sequence like '%TGA' then 1 else 0 end) as has_stop,
-        (case when dna_sequence like '%ATAT%' then 1 else 0 end) as has_atat,
-        (case when dna_sequence like '%GGG%' then 1 else 0 end) as has_ggg         
-from Samples  
-order by sample_id ASC
+SELECT *,
+       IF(dna_sequence LIKE 'ATG%', 1, 0) AS has_start,
+       IF(
+           dna_sequence LIKE '%TAA'
+           OR dna_sequence LIKE '%TAG'
+           OR dna_sequence LIKE '%TGA',
+           1,
+           0
+       ) AS has_stop,
+       IF(dna_sequence LIKE '%ATAT%', 1, 0) AS has_atat,
+       IF(dna_sequence LIKE '%GGG%', 1, 0) AS has_ggg
+FROM Samples
+ORDER BY sample_id ASC;
