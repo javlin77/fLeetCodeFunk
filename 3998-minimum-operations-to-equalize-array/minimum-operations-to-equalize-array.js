@@ -1,0 +1,1 @@
+minOperations = n => +n.some(c => c != n[0])
