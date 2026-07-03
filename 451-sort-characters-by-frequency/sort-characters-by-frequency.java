@@ -4,15 +4,20 @@ class Solution {
         for (char c : s.toCharArray()) {
             m.put(c, m.getOrDefault(c, 0) + 1);
         }
-        List<Character> l = new ArrayList<>(m.keySet());
+        List<Character> l = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            l.add(c);
+        }
         l.sort((a, b) -> {
-            return m.get(b) - m.get(a);
+            if (!m.get(a).equals(m.get(b))) {
+                return m.get(b) - m.get(a); 
+            } else {
+                return a - b; 
+            }
         });
         StringBuilder sb = new StringBuilder();
         for (char c : l) {
-            for (int i = 0; i < m.get(c); i++) {
-                sb.append(c);
-            }
+            sb.append(c);
         }
         return sb.toString();
     }
