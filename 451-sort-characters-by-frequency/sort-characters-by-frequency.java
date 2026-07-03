@@ -4,20 +4,18 @@ class Solution {
         for (char c : s.toCharArray()) {
             m.put(c, m.getOrDefault(c, 0) + 1);
         }
-        List<Character> l = new ArrayList<>();
-        for (char c : s.toCharArray()) {
-            l.add(c);
-        }
-        l.sort((a, b) -> {
-            if (!m.get(a).equals(m.get(b))) {
-                return m.get(b) - m.get(a); 
-            } else {
-                return a - b; 
+        PriorityQueue<Character> pq = new PriorityQueue<>(
+            (a, b) -> {
+                return m.get(b) - m.get(a);
             }
-        });
+        );
+        pq.addAll(m.keySet());
         StringBuilder sb = new StringBuilder();
-        for (char c : l) {
-            sb.append(c);
+        while (!pq.isEmpty()) {
+            char c = pq.poll();
+            for (int i = 0; i < m.get(c); i++) {
+                sb.append(c);
+            }
         }
         return sb.toString();
     }
