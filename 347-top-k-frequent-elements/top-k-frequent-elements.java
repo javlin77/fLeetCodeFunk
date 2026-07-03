@@ -5,15 +5,9 @@ class Solution {
             m.put(i, m.getOrDefault(i, 0) + 1);
         }
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> {
-            if (!m.get(a).equals(m.get(b))) {
-                return m.get(b) - m.get(a);
-            } else {
-                return b - a;
-            }
+            return m.get(b) - m.get(a);
         });
-        for (int key : m.keySet()) {
-            pq.offer(key);
-        }
+        pq.addAll(m.keySet());
         int[] res = new int[k];
         for (int i = 0; i < k; i++) {
             res[i] = pq.poll();
