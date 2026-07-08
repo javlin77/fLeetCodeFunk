@@ -40,6 +40,6 @@ public class Solution {
             pA = pA.next;
             pB = pB.next;
         }
-        return pA;
+        return pB;
     }
 }
